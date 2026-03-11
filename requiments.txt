@@ -47,3 +47,42 @@ DATA_MINING_PROJECT/
     ├── models/ 
     ├── reports/ 
     └── final_report.pdf     # Nơi để file báo cáo cuối cùng
+
+    `Viec Cua Hon
+- Quản lý Git & Môi trường: Setup GitHub, viết `requirements.txt` và đảm bảo code chạy lại được (reproducible) bằng `run_papermill.py`.
+- Tiền xử lý (Preprocessing): Làm sạch dữ liệu, xử lý missing/outlier, chuẩn hóa và mã hóa biến (Encoding) trong `src/data/cleaner.py`.
+- Phân lớp (Classification): Xây dựng mô hình dự đoán đăng ký tiết kiệm (Term deposit) bằng LogReg/RF/XGB. Bắt buộc xử lý mất cân bằng lớp (Imbalance) và đánh giá bằng PR-AUC/F1.
+- Bán giám sát (Semi-supervised): Xử lý nhánh giả lập thiếu nhãn (10–30%), dùng Self-training, vẽ learning curve và so sánh với mô hình Supervised-only.
+- Code Notebooks: Phụ trách chính `02_preprocess_feature.ipynb`, `04_modeling.ipynb` và `04b_semi_supervised.ipynb`.
+    `Nhiem vu cua Huy 
+- Tạo đặc trưng (Feature Engineering): Tạo các biến mới, gom nhóm giỏ sản phẩm trong `src/features/builder.py`.
+- Khai phá luật kết hợp (Association Rules): Tìm top luật cross-sell (bán chéo) và đề xuất gói sản phẩm trong `src/mining/association.py`.
+- Phân cụm (Clustering): Phân cụm hồ sơ tài chính (KMeans/DBSCAN), chuẩn hóa dữ liệu, đặt tên cụm và đánh giá bằng Silhouette/DBI.
+- Hồi quy (Regression): Xây dựng mô hình dự đoán số dư/tài chính theo tuổi/thu nhập (Linear/Ridge vs XGBRegressor), đánh giá bằng MAE/RMSE.
+- Code Notebooks: Phụ trách chính `01_eda.ipynb`, `03_mining_or_clustering.ipynb` và hỗ trợ xuất đồ thị.
+
+
+1. Khởi tạo & Dữ liệu	
+Setup Git, môi trường 
+
+Tải & Khám phá dữ liệu (EDA)	
+Viết Đặt vấn đề, Data Dictionary 
+
+2. Tiền xử lý & Đặc trưng	
+Xử lý nhiễu, Imbalance 
+
+Tạo feature giỏ sản phẩm 
+
+Viết phần Thiết kế pipeline 
+
+3. Khai phá & Mô hình hóa	
+Classification & Semi-supervised 
+
+Clustering & Association & Regression 
+
+Cập nhật tham số, lý do chọn mô hình 
+
+4. Đánh giá & Kết quả	
+Tổng hợp code vào luồng chạy	
+Vẽ biểu đồ metric so sánh	
+Phân tích insight, khuyến nghị

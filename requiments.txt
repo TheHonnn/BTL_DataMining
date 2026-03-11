@@ -1,0 +1,49 @@
+DATA_MINING_PROJECT/ 
+├── README.md 
+├── requirements.txt 
+├── .gitignore 
+├── configs/ 
+│   └── params.yaml          # Chứa tham số cấu hình: đường dẫn, tham số mô hình... [cite: 54, 58]
+├── data/ 
+│   ├── raw/                 # Thả file bank-additional-full.csv và names.txt vào đây 
+│   └── processed/           # Dữ liệu sau khi làm sạch sẽ lưu ở đây (ưu tiên .parquet/.csv) 
+├── notebooks/ 
+│   ├── 01_eda.ipynb                     # Khám phá dữ liệu 
+│   ├── 02_preprocess_feature.ipynb      # Tiền xử lý và tạo đặc trưng 
+│   ├── 03_mining_or_clustering.ipynb    # Chạy Apriori (luật kết hợp) và KMeans/DBSCAN (phân cụm) 
+│   ├── 04_modeling.ipynb                # Dự đoán tiết kiệm (Classification) và số dư (Regression) 
+│   ├── 04b_semi_supervised.ipynb        # Nhánh giả lập thiếu nhãn và self-training 
+│   └── 05_evaluation_report.ipynb       # Tổng hợp kết quả đánh giá 
+├── src/ 
+│   ├── __init__.py 
+│   ├── data/ 
+│   │   ├── __init__.py 
+│   │   ├── loader.py        # Hàm đọc dữ liệu từ data/raw/ 
+│   │   └── cleaner.py       # Hàm xử lý outlier, missing values, encoding 
+│   ├── features/ 
+│   │   ├── __init__.py 
+│   │   └── builder.py       # Hàm chuẩn hóa dữ liệu, gom giỏ sản phẩm 
+│   ├── mining/ 
+│   │   ├── __init__.py 
+│   │   ├── association.py   # Hàm tìm luật cross-sell 
+│   │   └── clustering.py    # Hàm phân cụm hồ sơ tài chính 
+│   ├── models/ 
+│   │   ├── __init__.py 
+│   │   ├── supervised.py      # Train/predict bằng LogReg/RF/XGB 
+│   │   └── semi_supervised.py # Code cho phần học bán giám sát 
+│   ├── evaluation/ 
+│   │   ├── __init__.py 
+│   │   ├── metrics.py       # Tính F1, PR-AUC, RMSE, MAE 
+│   │   └── report.py        # Xuất bảng/biểu đồ 
+│   └── visualization/ 
+│       ├── __init__.py 
+│       └── plots.py         # Hàm vẽ biểu đồ dùng chung 
+├── scripts/ 
+│   ├── run_pipeline.py      # Code chạy toàn bộ luồng từ đầu đến cuối 
+│   └── run_papermill.py     # Code chạy tuần tự các file notebooks 
+└── outputs/ 
+    ├── figures/ 
+    ├── tables/ 
+    ├── models/ 
+    ├── reports/ 
+    └── final_report.pdf     # Nơi để file báo cáo cuối cùng

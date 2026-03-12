@@ -1,0 +1,35 @@
+# 1. Cấu hình Dữ liệu (Paths & Data)
+data:
+  raw_path: "data/raw/bank-additional-full.csv"
+  processed_path: "data/processed/bank_cleaned.parquet"
+  target_col_classification: "y"          # Nhãn dự đoán cho bài toán phân lớp (gửi tiết kiệm)
+  target_col_regression: "euribor3m"      # Nhãn dự đoán cho bài toán hồi quy (chỉ số tài chính)
+
+# 2. Thiết lập Thực nghiệm (Experiment Setup)
+experiment:
+  test_size: 0.2                          # Giữ lại 20% dữ liệu để test
+  random_state: 42                        # Cố định seed để đảm bảo tái lập (Reproducible)
+
+# 3. Cấu hình Tiền xử lý (Preprocessing)
+preprocessing:
+  numeric_imputer: "median"               # Điền khuyết biến số bằng trung vị
+  categorical_imputer: "most_frequent"    # Điền khuyết biến phân loại bằng mode
+  scaling_method: "standard"              # Chuẩn hóa StandardScaler
+
+# 4. Tham số Khai phá & Mô hình hóa (Mining & Modeling)
+modeling:
+  classification:
+    imbalance_handling: "SMOTE"           # Bắt buộc xử lý mất cân bằng lớp
+    algorithms: ["LogReg", "RandomForest", "XGBoost"] 
+  
+  semi_supervised:
+    labeled_ratio: 0.2                    # Chỉ giữ lại 20% nhãn (giả lập thiếu nhãn)
+    unlabeled_ratio: 0.8
+    algorithm: "SelfTrainingClassifier"
+  
+  clustering:
+    algorithm: "KMeans"
+    n_clusters: 4                         # Số cụm giả định ban đầu cho hồ sơ tài chính
+  
+  regression:
+    algorithms: ["Ridge", "XGBRegressor"] # So sánh mô hình tuyến tính và Boosting

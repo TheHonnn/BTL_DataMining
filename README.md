@@ -1,1 +1,99 @@
-# BTL_DataMining
+DATA_MINING_PROJECT/ 
+├── README.md 
+├── requirements.txt 
+├── .gitignore 
+├── configs/ 
+│   └── params.yaml          # Chứa tham số cấu hình: đường dẫn, tham số mô hình... [cite: 54, 58]
+├── data/ 
+│   ├── raw/                 # Thả file bank-additional-full.csv và names.txt vào đây 
+│   └── processed/           # Dữ liệu sau khi làm sạch sẽ lưu ở đây (ưu tiên .parquet/.csv) 
+├── notebooks/ 
+│   ├── 01_eda.ipynb                     # Khám phá dữ liệu 
+│   ├── 02_preprocess_feature.ipynb      # Tiền xử lý và tạo đặc trưng 
+│   ├── 03_mining_or_clustering.ipynb    # Chạy Apriori (luật kết hợp) và KMeans/DBSCAN (phân cụm) 
+│   ├── 04_modeling.ipynb                # Dự đoán tiết kiệm (Classification) và số dư (Regression) 
+│   ├── 04b_semi_supervised.ipynb        # Nhánh giả lập thiếu nhãn và self-training 
+│   └── 05_evaluation_report.ipynb       # Tổng hợp kết quả đánh giá 
+├── src/ 
+│   ├── __init__.py 
+│   ├── data/ 
+│   │   ├── __init__.py 
+│   │   ├── loader.py        # Hàm đọc dữ liệu từ data/raw/ 
+│   │   └── cleaner.py       # Hàm xử lý outlier, missing values, encoding 
+│   ├── features/ 
+│   │   ├── __init__.py 
+│   │   └── builder.py       # Hàm chuẩn hóa dữ liệu, gom giỏ sản phẩm 
+│   ├── mining/ 
+│   │   ├── __init__.py 
+│   │   ├── association.py   # Hàm tìm luật cross-sell 
+│   │   └── clustering.py    # Hàm phân cụm hồ sơ tài chính 
+│   ├── models/ 
+│   │   ├── __init__.py 
+│   │   ├── supervised.py      # Train/predict bằng LogReg/RF/XGB 
+│   │   └── semi_supervised.py # Code cho phần học bán giám sát 
+│   ├── evaluation/ 
+│   │   ├── __init__.py 
+│   │   ├── metrics.py       # Tính F1, PR-AUC, RMSE, MAE 
+│   │   └── report.py        # Xuất bảng/biểu đồ 
+│   └── visualization/ 
+│       ├── __init__.py 
+│       └── plots.py         # Hàm vẽ biểu đồ dùng chung 
+├── scripts/ 
+│   ├── run_pipeline.py      # Code chạy toàn bộ luồng từ đầu đến cuối 
+│   └── run_papermill.py     # Code chạy tuần tự các file notebooks 
+└── outputs/ 
+    ├── figures/ 
+    ├── tables/ 
+    ├── models/ 
+    ├── reports/ 
+    └── final_report.pdf     # Nơi để file báo cáo cuối cùng
+
+    `Viec Cua Hon
+- Quản lý Git & Môi trường: Setup GitHub, viết `requirements.txt` và đảm bảo code chạy lại được (reproducible) bằng `run_papermill.py`.
+- Tiền xử lý (Preprocessing): Làm sạch dữ liệu, xử lý missing/outlier, chuẩn hóa và mã hóa biến (Encoding) trong `src/data/cleaner.py`.
+- Phân lớp (Classification): Xây dựng mô hình dự đoán đăng ký tiết kiệm (Term deposit) bằng LogReg/RF/XGB. Bắt buộc xử lý mất cân bằng lớp (Imbalance) và đánh giá bằng PR-AUC/F1.
+- Bán giám sát (Semi-supervised): Xử lý nhánh giả lập thiếu nhãn (10–30%), dùng Self-training, vẽ learning curve và so sánh với mô hình Supervised-only.
+- Code Notebooks: Phụ trách chính `02_preprocess_feature.ipynb`, `04_modeling.ipynb` và `04b_semi_supervised.ipynb`.
+    `Nhiem vu cua Huy 
+- Tạo đặc trưng (Feature Engineering): Tạo các biến mới, gom nhóm giỏ sản phẩm trong `src/features/builder.py`.
+- Khai phá luật kết hợp (Association Rules): Tìm top luật cross-sell (bán chéo) và đề xuất gói sản phẩm trong `src/mining/association.py`.
+- Phân cụm (Clustering): Phân cụm hồ sơ tài chính (KMeans/DBSCAN), chuẩn hóa dữ liệu, đặt tên cụm và đánh giá bằng Silhouette/DBI.
+- Hồi quy (Regression): Xây dựng mô hình dự đoán số dư/tài chính theo tuổi/thu nhập (Linear/Ridge vs XGBRegressor), đánh giá bằng MAE/RMSE.
+- Code Notebooks: Phụ trách chính `01_eda.ipynb`, `03_mining_or_clustering.ipynb` và hỗ trợ xuất đồ thị.
+
+
+-- Khoi tao mt ao 
+python -m venv venv
+-- kich hoat mt ao 
+venv\Scripts\activate
+python -m pip install --upgrade pip
+-- tai thu vien 
+pip install -r requirements.txt
+
+
+
+
+1. Khởi tạo & Dữ liệu	
+Setup Git, môi trường 
+
+Tải & Khám phá dữ liệu (EDA)	
+Viết Đặt vấn đề, Data Dictionary 
+
+2. Tiền xử lý & Đặc trưng	
+Xử lý nhiễu, Imbalance 
+
+Tạo feature giỏ sản phẩm 
+
+Viết phần Thiết kế pipeline 
+
+3. Khai phá & Mô hình hóa	
+Classification & Semi-supervised 
+
+Clustering & Association & Regression 
+
+Cập nhật tham số, lý do chọn mô hình 
+
+4. Đánh giá & Kết quả	
+Tổng hợp code vào luồng chạy	
+Vẽ biểu đồ metric so sánh	
+Phân tích insight, khuyến nghị

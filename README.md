@@ -57,9 +57,9 @@ DATA_MINING_PROJECT/
     `Nhiem vu cua Huy 
 - Tạo đặc trưng (Feature Engineering): Tạo các biến mới, gom nhóm giỏ sản phẩm trong `src/features/builder.py`.
 - Khai phá luật kết hợp (Association Rules): Tìm top luật cross-sell (bán chéo) và đề xuất gói sản phẩm trong `src/mining/association.py`.
-- Phân cụm (Clustering): Phân cụm hồ sơ tài chính (KMeans/DBSCAN), chuẩn hóa dữ liệu, đặt tên cụm và đánh giá bằng Silhouette/DBI.
+- Phân cụm (Clus1tering): Phân cụm hồ sơ tài chính (KMeans/DBSCAN), chuẩn hóa dữ liệu, đặt tên cụm và đánh giá bằng Silhouette/DBI.
 - Hồi quy (Regression): Xây dựng mô hình dự đoán số dư/tài chính theo tuổi/thu nhập (Linear/Ridge vs XGBRegressor), đánh giá bằng MAE/RMSE.
-- Code Notebooks: Phụ trách chính `01_eda.ipynb`, `03_mining_or_clustering.ipynb` và hỗ trợ xuất đồ thị.
+- Code Notebooks: Phụ trách chính `0_eda.ipynb`, `03_mining_or_clustering.ipynb` và hỗ trợ xuất đồ thị.
 
 
 -- Khoi tao mt ao 
@@ -69,9 +69,15 @@ venv\Scripts\activate
 python -m pip install --upgrade pip
 -- tai thu vien 
 pip install -r requirements.txt
-
-
-
+sau khi chạy builder.py
+gắn phần này vào terminal:
+python -m scripts.test_features
+sau khi chạy test_association.py
+gắn vào terminal:
+python -m scripts.test_association
+sau khi test xong clustering.py
+python -m scripts.test_clustering
+python -m scripts.test_regression
 
 1. Khởi tạo & Dữ liệu	
 Setup Git, môi trường 

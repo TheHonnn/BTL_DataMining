@@ -10,3 +10,4 @@ PyYAML>=6.0
 papermill>=2.5.0
 jupyter>=1.0.0
 ipykernel>=6.0.0
+mlxtend

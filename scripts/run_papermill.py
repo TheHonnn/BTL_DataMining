@@ -3,9 +3,9 @@ import os
 
 # Danh sách chạy theo đúng thứ tự Pipeline Khai phá dữ liệu
 notebooks = [
-     # 01
+    "notebooks/01_eda.ipynb",
     "notebooks/02_preprocess_feature.ipynb",
-    #03
+    "notebooks/03_mining_of_clustering.ipynb",
     "notebooks/04_modeling.ipynb",
     "notebooks/04b_semi_supervised.ipynb",
     #05
